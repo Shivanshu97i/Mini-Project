@@ -42,8 +42,13 @@ const User = new mongoose.model("User", userSchema);
 
 passport.use(User.createStrategy());
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(function (user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+  done(null, user);
+});
 
 app.get("/secret", (req, res) => {
   res.send("Logged In");
@@ -91,7 +96,7 @@ app.post("/login", function (req, res) {
     if (err) {
       return console.log(err + "error");
     }
-    return res.redirect("/todo");
+    return res.send("Done");
   });
 });
 
