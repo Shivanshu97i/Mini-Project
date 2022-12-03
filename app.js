@@ -96,7 +96,7 @@ app.post("/login", function (req, res) {
     if (err) {
       return console.log(err + "error");
     }
-    return res.redirect("/todo");
+    return res.redirect("Logged In");
   });
 });
 
