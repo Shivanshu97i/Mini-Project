@@ -96,7 +96,8 @@ app.post("/login", function (req, res) {
     if (err) {
       return console.log(err + "error");
     }
-    return res.send("Done");
+
+    return res.redirect("Logged In");
   });
 });
 
