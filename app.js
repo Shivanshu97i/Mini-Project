@@ -37,8 +37,8 @@ mongoose
   });
 
 const Attendance = new mongoose.Schema({
-  id: String,
-  name: String,
+  courseId: String,
+  courseName: String,
   attendance: Number,
   totalAttendance: Number
 });
@@ -164,7 +164,7 @@ app.post("/postAttendance", async function (req, res) {
       (att) => att.id === String(courseId)
     );
     if (index === -1) {
-      student.attendance.push({ id: courseId, name: courseName, attendance: attendance, totalAttendance: totalAttendance });
+      student.attendance.push({ courseId: courseId, courseName: courseName, attendance: attendance, totalAttendance: totalAttendance });
     } else {
       student.attendance[index].attendance = attendance;
       student.attendance[index].totalAttendance = totalAttendance;
