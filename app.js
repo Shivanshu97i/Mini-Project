@@ -185,7 +185,7 @@ app.get("/getAttendance", async function (req, res) {
   try {
     const student = await User.findById(studentId);
     const index = student.attendance.findIndex(
-      (att) => att.id === String(courseId)
+      (att) => att.courseId === String(courseId)
     );
     if (index === -1) {
       res.status(404).send("Not Found");
@@ -198,6 +198,25 @@ app.get("/getAttendance", async function (req, res) {
   }
 });
 
+app.get("/getAllAttendance", async (req, res) => {
+  console.log(req.query);
+  const { studentId } = req.query;
+  if (!studentId) {
+    res.status(400).send("Bad Request");
+  }
+  try {
+    const student = await User.findById(studentId);
+    console.log(student);
+    if (!student) {
+      res.status(404).send("Not Found");
+      return;
+    }
+    res.status(200).send(student.attendance);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Internal Server Error");
+  }
+});
 // {
 //   "_id": {
 //     "$oid": "cse_1"
