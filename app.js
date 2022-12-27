@@ -13,6 +13,15 @@ app.use(
     extended: true,
   })
 );
+let cse_1;
+let cse_2;
+let cse_3;
+let cse_4;
+let ece_1;
+let ece_2;
+let ece_3;
+let ece_4;
+
 
 app.use(session({
   secret: process.env.SECRET_KEY,
@@ -73,6 +82,7 @@ passport.deserializeUser(function (user, done) {
 
 app.post("/register", function (req, res) {
 
+
   User.register(
     {
       username: req.body.email || req.query.email,
@@ -84,6 +94,7 @@ app.post("/register", function (req, res) {
     },
     req.body.password || req.query.password,
     function (err, user) {
+
       console.log("Here");
       if (err) {
         console.log("Here1");
@@ -91,22 +102,72 @@ app.post("/register", function (req, res) {
         res.send("Not Registered Try again");
       } else {
         console.log("Registered");
+        const ok2 = req.body.branch || req.query.branch;
+        const branch1 = ok2.toLowerCase();
+        const sem1 = user.semester;
+        const ok1 = branch1 + "_" + sem1;
+        console.log(ok1);
+        switch (ok1.toString()) {
+          case "cse_1":
+            const cse1 = cse_1.length;
+            for (let i = 0; i < cse1; i++) {
+              user.attendance.push(cse_1[i]);
+            }
+            break;
+          case "cse_2":
+            const cse2 = cse_2.length;
+            for (let i = 0; i < cse2; i++) {
+              user.attendance.push(cse_2[i]);
+            }
+            break;
+          case "cse_3":
+            const cse3 = cse_3.length;
+            for (let i = 0; i < cse3; i++) {
+              user.attendance.push(cse_3[i]);
+            }
+            break;
+          case "cse_4":
+            const cse4 = cse_4.length;
+            for (let i = 0; i < cse4; i++) {
+              user.attendance.push(cse_4[i]);
+            }
+            break;
+          case "ece_1":
+            const ece1 = ece_1.length;
+            for (let i = 0; i < ece1; i++) {
+              user.attendance.push(ece_1[i]);
+            }
+            break;
+          case "ece_2":
+            const ece2 = ece_2.length;
+            for (let i = 0; i < ece2; i++) {
+              user.attendance.push(ece_2[i]);
+            }
+            break;
+          case "ece_3":
+            const ece3 = ece_3.length;
+            for (let i = 0; i < ece3; i++) {
+              user.attendance.push(ece_3[i]);
+            }
+            break;
+          case "ece_4":
+            const ece4 = ece_4.length;
+            for (let i = 0; i < ece4; i++) {
+              user.attendance.push(ece_4[i]);
+            }
+            break;
+          default:
+            const ok3 = [];
+        }
         res.send(user);
-        // passport.authenticate('local', req, res, function () {
-        //   console.log("Here3");
-        //   res.redirect('/dashboard');
-        // });
+
       }
     }
   );
 });
 
 app.post("/login",
-  // function (req, res) {
-  // const user = new User({
-  //   username: req.body.email,
-  //   password: req.body.password,
-  // });
+
 
 
   passport.authenticate('local', { failureRedirect: '/login', failureMessage: true }),
@@ -115,31 +176,6 @@ app.post("/login",
   });
 
 
-// req.login(user, function (err) {
-//   if (err) {
-//     return console.log(err + "error");
-//   }
-
-//   return res.send(res);
-// });
-// });
-
-// app.post("/todoadd", (req, res) => {
-//   User.findById(req.user.id, function (err, foundUser) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       if (foundUser) {
-//         console.log(req.body.todo);
-//         foundUser.todo = req.body.todo;
-//         // foundUser.todo.push(req.body.todo);
-//         foundUser.save(function () {
-//           res.redirect("/login");
-//         });
-//       }
-//     }
-//   });
-// });
 
 app.get("/logout", function (req, res) {
   req.logout();
@@ -217,19 +253,266 @@ app.get("/getAllAttendance", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-// {
-//   "_id": {
-//     "$oid": "cse_1"
-//   },
-// "MTL1025": "Engineering Mathematics-1",
-// "ECL1010": "Basic Electronics",
-// "ECP1010": "Basic Electronics Lab",
-// "PHL1012": "Engineering Physics",
-// "PHP1012": "Engineering Physics Lab",
-// "CSL1022": "Intro To C Programming",
-// "CSP1022": "C Programming Lab",
-// "LNL1411": "Professional Communication",
-// "LNP1411": "Professional Communication Lab",
-// "MEL1039": "Engineering Graphics with CAD",
-// "CSL1001": "Intro to Computer Sc. and Engineering"
-// }
+
+cse_1 = [{
+  courseId: "MTL1025",
+  courseName: "Engineering Mathematics-1",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECL1010",
+  courseName: "Basic Electronics",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECP1010",
+  courseName: "Basic Electronics Lab",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "PHL1012",
+  courseName: "Engineering Physics",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "PHP1012",
+  courseName: "Engineering Physics Lab",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "CSL1001",
+  courseName: "Introduction to Coputer Science",
+  attendance: 0,
+  totalAttendance: 0
+},]
+  ;
+cse_2 = [{
+  courseId: "CSL2031",
+  courseName: "Data Structures",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "CSP2031",
+  courseName: "Data Structures Lab",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "CSL1028",
+  courseName: "Python Programming",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "CSP1028",
+  courseName: "Python Programming Lab",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "MTL1026",
+  courseName: "Engineering Mathematics-2",
+  attendance: 0,
+  totalAttendance: 0
+}]
+  ;
+cse_3 = [{
+  courseId: "PCL2042",
+  courseName: "Intro to Logic",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "CSL2041",
+  courseName: "Theory Of Computation",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "CSL2061",
+  courseName: "COA",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "CSL2051",
+  courseName: "Operating Systems",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "CSP2051",
+  courseName: "Operating Systems Lab",
+  attendance: 0,
+  totalAttendance: 0
+}]
+  ;
+cse_4 = [{
+  courseId: "CSL3071",
+  courseName: "DBMS",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "CSP3071",
+  courseName: "DBMS Lab",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "CSL3032",
+  courseName: "Design and Algorithm Analysis",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "CSP3032",
+  courseName: "Design and Algorithm Analysis Lab",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECL2060",
+  courseName: "Microprocessing and Interfacing",
+  attendance: 0,
+  totalAttendance: 0
+}]
+  ;
+ece_1 = [{
+  courseId: "MTL1025",
+  courseName: "Engineering Mathematics-1",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECL1010",
+  courseName: "Basic Electronics",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECP1010",
+  courseName: "Basic Electronics Lab",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "PHL1012",
+  courseName: "Engineering Physics",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "PHP1012",
+  courseName: "Engineering Physics Lab",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "CSL1001",
+  courseName: "Introduction to Electronics",
+  attendance: 0,
+  totalAttendance: 0
+},
+]
+  ;
+
+ece_2 = [{
+  courseId: "MTL1026",
+  courseName: "Engineering Mathematics-2",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECP1200",
+  courseName: "Engineering Graphics",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECL1030",
+  courseName: "Electronics Circuits and Simulation",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECL1022",
+  courseName: "Network Analysis and Synthesis",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "PCL1067",
+  courseName: "Discourse of Human Virtue",
+  attendance: 0,
+  totalAttendance: 0
+}]
+  ;
+ece_3 = [{
+  courseId: "PCL2042",
+  courseName: "Intro to logic",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECL2040",
+  courseName: "Electromagnetic Field Theory",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECL2151",
+  courseName: "Analog Communication Engineering",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECL2070",
+  courseName: "Digital Electronics",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECP2201",
+  courseName: "Electronics Workshop Lab",
+  attendance: 0,
+  totalAttendance: 0
+}]
+  ;
+ece_4 = [{
+  courseId: "ECL2030",
+  courseName: "LIC and Applications",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECL2152",
+  courseName: "Digital Communication Enginnering",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECL2041",
+  courseName: "Antenna and wave propagation",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECL2060",
+  courseName: "Microprocessor Systems",
+  attendance: 0,
+  totalAttendance: 0
+},
+{
+  courseId: "ECP1200",
+  courseName: "MATLAB Programming",
+  attendance: 0,
+  totalAttendance: 0
+}]
+  ;
