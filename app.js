@@ -13,6 +13,7 @@ app.use(
     extended: true,
   })
 );
+let id;
 let cse_1;
 let cse_2;
 let cse_3;
@@ -79,10 +80,123 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (user, done) {
   done(null, user);
 });
+function course(ok1) {
+  const student = User.findById(id);
+  console.log(ok1);
+  switch (ok1.toString()) {
+    case "cse_1":
+      const cse1 = cse_1.length;
+      for (let i = 0; i < cse1; i++) {
+        student.attendance.push(cse_1[i]);
+      }
+      break;
+    case "cse_2":
+      const cse2 = cse_2.length;
+      for (let i = 0; i < cse2; i++) {
+        student.attendance.push(cse_2[i]);
+      }
+      break;
+    case "cse_3":
+      const cse3 = cse_3.length;
+      for (let i = 0; i < cse3; i++) {
+        student.attendance.push(cse_3[i]);
+      }
+      break;
+    case "cse_4":
+      const cse4 = cse_4.length;
+      for (let i = 0; i < cse4; i++) {
+        student.attendance.push(cse_4[i]);
+      }
+      break;
+    case "ece_1":
+      const ece1 = ece_1.length;
+      for (let i = 0; i < ece1; i++) {
+        student.attendance.push(ece_1[i]);
+      }
+      break;
+    case "ece_2":
+      const ece2 = ece_2.length;
+      for (let i = 0; i < ece2; i++) {
+        student.attendance.push(ece_2[i]);
+      }
+      break;
+    case "ece_3":
+      const ece3 = ece_3.length;
+      for (let i = 0; i < ece3; i++) {
+        student.attendance.push(ece_3[i]);
+      }
+      break;
+    case "ece_4":
+      const ece4 = ece_4.length;
+      for (let i = 0; i < ece4; i++) {
+        student.attendance.push(ece_4[i]);
+      }
+      break;
+    default:
+      const ok3 = [];
+  }
 
+
+}
 app.post("/register", function (req, res) {
-
-
+  let ok5 = [];
+  const branch2 = req.body.branch || req.query.branch;
+  const sem0 = req.body.semester || req.query.semester;
+  const ok0 = branch2.toLowerCase() + "_" + sem0;
+  console.log(ok0);
+  switch (ok0) {
+    case "cse_1":
+      const cse1 = cse_1.length;
+      for (let i = 0; i < cse1; i++) {
+        ok5.push(cse_1[i]);
+      }
+      break;
+    case "cse_2":
+      const cse2 = cse_2.length;
+      for (let i = 0; i < cse2; i++) {
+        ok5.push(cse_2[i]);
+      }
+      break;
+    case "cse_3":
+      const cse3 = cse_3.length;
+      for (let i = 0; i < cse3; i++) {
+        ok5.push(cse_3[i]);
+      }
+      break;
+    case "cse_4":
+      const cse4 = cse_4.length;
+      for (let i = 0; i < cse4; i++) {
+        ok5.push(cse_4[i]);
+      }
+      break;
+    case "ece_1":
+      const ece1 = ece_1.length;
+      for (let i = 0; i < ece1; i++) {
+        ok5.push(ece_1[i]);
+      }
+      break;
+    case "ece_2":
+      const ece2 = ece_2.length;
+      for (let i = 0; i < ece2; i++) {
+        ok5.push(ece_2[i]);
+      }
+      break;
+    case "ece_3":
+      const ece3 = ece_3.length;
+      for (let i = 0; i < ece3; i++) {
+        ok5.push(ece_3[i]);
+      }
+      break;
+    case "ece_4":
+      const ece4 = ece_4.length;
+      for (let i = 0; i < ece4; i++) {
+        ok5.push(ece_4[i]);
+      }
+      break;
+    default:
+      const ok3 = [];
+  }
+  console.log(ok5);
   User.register(
     {
       username: req.body.email || req.query.email,
@@ -91,6 +205,7 @@ app.post("/register", function (req, res) {
       enrollmentNumber: req.body.enrollment || req.query.enrollment,
       branch: req.body.branch || req.query.branch,
       semester: req.body.semester || req.query.semester,
+      attendance: ok5,
     },
     req.body.password || req.query.password,
     function (err, user) {
@@ -102,68 +217,13 @@ app.post("/register", function (req, res) {
         res.send("Not Registered Try again");
       } else {
         console.log("Registered");
-        const ok2 = req.body.branch || req.query.branch;
-        const branch1 = ok2.toLowerCase();
-        const sem1 = user.semester;
-        const ok1 = branch1 + "_" + sem1;
-        console.log(ok1);
-        switch (ok1.toString()) {
-          case "cse_1":
-            const cse1 = cse_1.length;
-            for (let i = 0; i < cse1; i++) {
-              user.attendance.push(cse_1[i]);
-            }
-            break;
-          case "cse_2":
-            const cse2 = cse_2.length;
-            for (let i = 0; i < cse2; i++) {
-              user.attendance.push(cse_2[i]);
-            }
-            break;
-          case "cse_3":
-            const cse3 = cse_3.length;
-            for (let i = 0; i < cse3; i++) {
-              user.attendance.push(cse_3[i]);
-            }
-            break;
-          case "cse_4":
-            const cse4 = cse_4.length;
-            for (let i = 0; i < cse4; i++) {
-              user.attendance.push(cse_4[i]);
-            }
-            break;
-          case "ece_1":
-            const ece1 = ece_1.length;
-            for (let i = 0; i < ece1; i++) {
-              user.attendance.push(ece_1[i]);
-            }
-            break;
-          case "ece_2":
-            const ece2 = ece_2.length;
-            for (let i = 0; i < ece2; i++) {
-              user.attendance.push(ece_2[i]);
-            }
-            break;
-          case "ece_3":
-            const ece3 = ece_3.length;
-            for (let i = 0; i < ece3; i++) {
-              user.attendance.push(ece_3[i]);
-            }
-            break;
-          case "ece_4":
-            const ece4 = ece_4.length;
-            for (let i = 0; i < ece4; i++) {
-              user.attendance.push(ece_4[i]);
-            }
-            break;
-          default:
-            const ok3 = [];
-        }
+        // id = user._id.toString();
+        // console.log(id);
         res.send(user);
-
       }
     }
   );
+
 });
 
 app.post("/login",
